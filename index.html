@@ -8,8 +8,9 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
        <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="css/tablestyle.css" />
 
-<link type="text/css" rel="stylesheet" href="dreamcodes/tables1/css/tsc_tables1.css" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
     <!-- Good default declaration:
@@ -28,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="jquerycss.css">
-     
+
   <!-- <link rel="stylesheet" href="css/framework7.material.min.css">
     <link rel="stylesheet" href="css/framework7.material.colors.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -65,7 +66,7 @@
         // Query the success callback
         //
         function querySuccess(tx, results) {
-               var tblText='<table id="t01" class="tsc_table_s1"><tr><th>ID</th> <th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
+               var tblText='<table id="t01" cellspacing="0"><tr><th>ID</th> <th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
                var len = results.rows.length;
                for (var i = 0; i < len; i++) {
                    var tmpArgs=results.rows.item(i).id + ",'" + results.rows.item(i).date
@@ -198,39 +199,89 @@ function handleDates(elm, options) {
        </script>
 </head>
 <body>
-<div class="container">
+    <div id="content">
+    				<div class="inner">
+                        <article class="box post post-excerpt">
+							<header>
+								<!--
+									Note: Titles and subtitles will wrap automatically when necessary, so don't worry
+									if they get too long. You can also remove the <p> entirely if you don't
+									need a subtitle.
+								-->
+								<h2><a href="#">Om Namah Sri Sitarama Yateendraya</a></h2>
+								<p>Vasudeva, Enter the data of Yateendra Astakam parayana</p>
+							</header>
     <!-- Status bar overlay for fullscreen mode-->
-
-      <h1 style="color:white" >Go Matha Application</h1>
-      <h3 style="color:white" >Vasudeva</h3>
-<section class="main">
-  <form class="form-4" action="">
-      <div style="text-align: left">
-      <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
-
-      </div>
-      <div>
-            <!--Name<input type="text" value="Name" id="txtName"><br>-->
-            <b>  Date</b><input type="text"  id="txtDateOB"><br>
-                 <b>Location</b><input type="text" value="" id="txtLocation"><br>
-                  <b>Medium</b><input type="text" value="" id="txtMedium"><br>
-                <b>Astakam Count</b><select class="nootaenimidhi" id="txtAstakamCount"></select>
-                <b>Astakam Value Count</b><select class="nootaenimidhi" id="txtAstakamValueCount"></select>
-                <b>Comments</b><input type="text" value="" id="txtComments"><br>
-
-      </div>
-	  <div style="text-align: center">
+    <section class="main">
+      <form class="form-4" action="">
+          <div style="text-align: left">
           <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
 
-      </div>
-      <div id="tblDiv"></div>
-      <div style="text-align: center">
-          <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
+          </div>
+          <div>
+                <!--Name<input type="text" value="Name" id="txtName"><br>-->
+                <b>  Date</b><input type="text"  id="txtDateOB"><br>
+                     <b>Location</b><select id="txtLocation" >
+                         <option value="Ashramam">Ashramam</option>
+                         <option value="Banglore">Banglore</option>
+                         <option value="Vijayawada">Vijayawada</option>
+                         <option value="Hyderabad">Hyderabad</option>
+                         <option value="Travel">Travel</option>
+                         <option value="Others">Others</option>
+                     </select><br>
+                      <b>Medium</b><select id="txtMedium">
+                          <option value="Travel">Travel</option>
+                          <option value="Work">Work</option>
+                          <option value="Room">Room</option>
+                          <option value="Devotional">Devotional</option>
+                          <option value="HouseHold">HouseHold</option>HouseHold
+                          <option value="Education">Education</option>
+                          <option value="Entertainment">Entertainment</option>
+                          <option value="Others">Others</option>
+                      </select><br>
+                    <b>Astakam Count</b><select class="nootaenimidhi" id="txtAstakamCount"></select><br>
+                    <b>Astakam Value Count</b><select class="nootaenimidhi" id="txtAstakamValueCount"></select><br>
+                    <b>Comments</b><input type="text" value="" id="txtComments"><br>
 
-      </div>
-</div>
-</form>​
-</section>
+          </div>
+    	  <div style="text-align: center">
+              <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
+
+          </div>
+          <div id="tblDiv"></div>
+          <div style="text-align: center">
+              <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
+
+          </div>
+    </div>
+    </form>​
+    </section>
+
+</article>
+<!-- Sidebar -->
+			<div id="sidebar">
+
+				<!-- Logo -->
+					<h1 id="logo"><a href="#">Parayanam</a></h1>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li class="current"><a href="index.html">Add Data</a></li>
+							<li><a href="index0.html">Archives</a></li>
+							<li><a href="#">About Me</a></li>
+							<li><a href="#">Contact Me</a></li>
+						</ul>
+					</nav>
+
+
+			</div>
+            <!-- Scripts -->
+            <script src="assets/js/skel.min.js"></script>
+    			<script src="assets/js/util.js"></script>
+    			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    			<script src="assets/js/main.js"></script>
+
   </body>
 
 </html>
