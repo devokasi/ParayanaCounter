@@ -213,6 +213,17 @@ function handleDates(elm, options) {
     $("#txtDateOB").datepicker();
   });
   </script>
+  <script>
+    $(function(){
+        var $select = $(".nootaenimidhi");
+        for (i=1;i<=108;i++){
+            $select.append($('<option></option>').val(i).html(i))
+        }
+        $('select.nootaenimidhi').on('change',function(){
+
+        });
+    });
+       </script>
 </head>
 <body>
 <div class="container">
