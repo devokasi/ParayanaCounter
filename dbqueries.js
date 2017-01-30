@@ -1,6 +1,5 @@
     // Wait for Cordova to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
 
     var currentRow;
     // Populate the database
