@@ -94,15 +94,15 @@
 		}
 
 		.container.\37 5\25 {
-			width: 75%;
+			width: 100%;
 		}
 
 		.container.\35 0\25 {
-			width: 50%;
+			width: 100%;
 		}
 
 		.container.\32 5\25 {
-			width: 25%;
+			width: 100%;
 		}
 
 		.container {
@@ -367,7 +367,7 @@
 	}
 
 	.\38 u, .\38 u\24 {
-		width: 66.6666666667%;
+		width: 100%;
 		clear: none;
 		margin-left: 0;
 	}
@@ -2511,7 +2511,7 @@
 			.box.post .info {
 				position: absolute;
 				width: 5.5em;
-				overflow: hidden;
+				overflow: auto;
 				background-color: #fff;
 				background-image: url("images/bg02.png");
 				left: -10.5em;
@@ -2868,7 +2868,7 @@
 		/* Basic */
 
 			html, body {
-				overflow-x: hidden;
+				overflow-x: auto;
 			}
 
 		/* Content */
