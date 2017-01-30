@@ -28,37 +28,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="jquerycss.css">
-      <style>
-    @import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
-    body {
-      background: #7f9b4e url(dooda.jpg) repeat center ;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      background-size: cover;
-      position: absolute;
-    }
-    .container > header h1,
-    .container > header h2 {
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,0.7);
-    }
-    html { overflow-y: scroll;
-    overflow-x: scroll; }
-    table,  th, td {
-    border: 1px solid black;
-    color: white;
-    }
-    table th {
-    background-color: black;
-    border: 1px solid black;
-    color: white;
-    }
-    table tr{
-      font-weight: bold;
-    }
-
-
-    </style>
+     
   <!-- <link rel="stylesheet" href="css/framework7.material.min.css">
     <link rel="stylesheet" href="css/framework7.material.colors.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -95,7 +65,7 @@
         // Query the success callback
         //
         function querySuccess(tx, results) {
-               var tblText='<table id="t01"><tr><th>ID</th> <th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
+               var tblText='<table id="t01" class="tsc_table_s1"><tr><th>ID</th> <th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
                var len = results.rows.length;
                for (var i = 0; i < len; i++) {
                    var tmpArgs=results.rows.item(i).id + ",'" + results.rows.item(i).date
