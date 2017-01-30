@@ -1,11 +1,14 @@
+<script type="text/javascript" charset="utf-8">
+
     // Wait for Cordova to load
     //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
     var currentRow;
     // Populate the database
     //
     function populateDB(tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS PARAYANA (id INTEGER PRIMARY KEY AUTOINCREMENT,date,location,medium,astakam_count,astakam_value_count,date,comments)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS COW (id INTEGER PRIMARY KEY AUTOINCREMENT, location,name,number,breed,dob,health_c,parents_d,medicines_u,other_i,life_status,gender)');
 
     }
 
@@ -181,3 +184,4 @@ function handleDates(elm, options) {
       currentField.blur();
   });
 }
+</script>
