@@ -1,44 +1,20 @@
-
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content=" initial-scale=1" />
-       <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="css/tablestyle.css" />
-
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <meta name="description" content="Custom Login Form Styling with CSS3" />
-    <meta name="keywords" content="css3, login, form, custom, input, submit, button, html5, placeholder" />
-    <meta name="author" content="Codrops" />
-    <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="jquerycss.css">
 
-  <!-- <link rel="stylesheet" href="css/framework7.material.min.css">
-    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-       <link rel="stylesheet" href="css/my-app.css">-->
-    <title>Go Matha</title>
+    <title>Parayana</title>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
     <script type="text/javascript" charset="utf-8">
-
         // Wait for Cordova to load
         //
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -47,7 +23,7 @@
         // Populate the database
         //
         function populateDB(tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS PARAYANA (id INTEGER PRIMARY KEY AUTOINCREMENT,date,location,medium,astakam_count,astakam_value_count,comments)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS PARAYANA (id INTEGER PRIMARY KEY AUTOINCREMENT,parayanam,date,location,medium,astakam_count,astakam_value_count,comments)');
 
         }
 
@@ -58,36 +34,37 @@
         }
 
         function searchQueryDB(tx) {
-            tx.executeSql("SELECT * FROM PARAYANA where astakam_count like ('%"+ document.getElementById("txtAstakamCount").value + "%')",
-                    [], querySuccess, errorCB);
+            tx.executeSql("SELECT * FROM PARAYANA where astakam_count like ('%" + document.getElementById("txtAstakamCount").value + "%')", [], querySuccess, errorCB);
         }
 
         // Query the success callback
         //
         function querySuccess(tx, results) {
-               var tblText='<table id="t01" cellspacing="0"><tr><th>ID</th> <th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
-               var len = results.rows.length;
-               for (var i = len-1; i >=0; i--) {
-                   var tmpArgs=results.rows.item(i).id + ",'" + results.rows.item(i).date
-                           + "','" + results.rows.item(i).location+"'"+ results.rows.item(i).medium
-                                   + "','"+ results.rows.item(i).astakam_count+"'"+ results.rows.item(i).astakam_value_count+"'"+ results.rows.item(i).comments+"'";
-                   tblText +='<tr><td>' + results.rows.item(i).id +'</td><td>'
-                           + results.rows.item(i).date +'</td><td>' + results.rows.item(i).location +'</td><td>' + results.rows.item(i).medium +'</td><td>' + results.rows.item(i).astakam_count +'</td><td>' + results.rows.item(i).astakam_value_count +'</td><td>'
-                           + results.rows.item(i).comments +'</td><td></tr>';
-               }
-               tblText +="</table>";
-               document.getElementById("tblDiv").innerHTML =tblText;
-           }
+            var tblText = '<table id="t01" cellspacing="0"><tr><th>ID</th> <th>Parayana</th><th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
+            var len = results.rows.length;
+            for (var i = len - 1; i >= 0; i--) {
+                var tmpArgs = results.rows.item(i).id + "','" + results.rows.item(i).parayanam + "','" + results.rows.item(i).date +
+                    "','" + results.rows.item(i).location + "','" + results.rows.item(i).medium +
+                    "','" + results.rows.item(i).astakam_count + "','" + results.rows.item(i).astakam_value_count + "','" + results.rows.item(i).comments + "'";
+                tblText += '<tr><td>' + results.rows.item(i).id + '</td><td>' +
+                    results.rows.item(i).parayanam + '</td><td>' +
+                    results.rows.item(i).date + '</td><td>' + results.rows.item(i).location + '</td><td>' + results.rows.item(i).medium + '</td><td>' + results.rows.item(i).astakam_count + '</td><td>' + results.rows.item(i).astakam_value_count +
+                    '</td><td>' +
+                    results.rows.item(i).comments + '</td><td></tr>';
+            }
+            tblText += "</table>";
+            document.getElementById("tblDiv").innerHTML = tblText;
+        }
 
         //Delete query
         function deleteRow(tx) {
-          tx.executeSql('DELETE FROM PARAYANA WHERE id = ' +document.getElementById("editID").value, [], queryDB, errorCB);
+            tx.executeSql('DELETE FROM PARAYANA WHERE id = ' + document.getElementById("editID").value, [], queryDB, errorCB);
         }
 
         // Transaction error callback
         //
         function errorCB(err) {
-            alert("Error processing SQL: "+err.code);
+            alert("Error processing SQL: " + err.code);
         }
 
         // Transaction success callback
@@ -97,7 +74,7 @@
             db.transaction(queryDB, errorCB);
         }
 
-         // Cordova is ready
+        // Cordova is ready
         //
         function onDeviceReady() {
             var db = window.openDatabase("Database", "1.0", "Cordova PARAYANA", 200000);
@@ -107,9 +84,10 @@
         //Insert query
         //
         function insertDB(tx) {
-              tx.executeSql('INSERT INTO PARAYANA (date,location,medium,astakam_count,astakam_value_count,comments) VALUES ("' +document.getElementById("txtDateOB").value
-                      +'","'+document.getElementById("txtLocation").value+'","'+document.getElementById("txtMedium").value+'","'+document.getElementById("txtAstakamCount").value+'","'+document.getElementById("txtAstakamValueCount").value+'","'+document.getElementById("txtComments").value+'")');
-          }
+            tx.executeSql('INSERT INTO PARAYANA (parayanam,date,location,medium,astakam_count,astakam_value_count,comments) VALUES ("' + document.getElementById("txtparayanam").value + '","' + document.getElementById("txtDateOB").value +
+                '","' + document.getElementById("txtLocation").value + '","' + document.getElementById("txtMedium").value + '","' + document.getElementById("txtAstakamCount").value + '","' + document.getElementById("txtAstakamValueCount").value +
+                '","' + document.getElementById("txtComments").value + '")');
+        }
 
         function goInsert() {
             var db = window.openDatabase("Database", "1.0", "Cordova PARAYANA", 200000);
@@ -123,104 +101,105 @@
 
 
         function goDelete() {
-             var db = window.openDatabase("Database", "1.0", "Cordova PARAYANA", 200000);
-             db.transaction(deleteRow, errorCB);
-             document.getElementById('qrpopup').style.display='none';
+            var db = window.openDatabase("Database", "1.0", "Cordova PARAYANA", 200000);
+            db.transaction(deleteRow, errorCB);
+            document.getElementById('qrpopup').style.display = 'none';
         }
 
         //Show the popup after tapping a row in table
         //
-        function goPopup(row,rowname,rownum) {
-            currentRow=row;
-            document.getElementById("qrpopup").style.display="block";
+        function goPopup(row, rowname, rownum) {
+            currentRow = row;
+            document.getElementById("qrpopup").style.display = "block";
             document.getElementById("editNameBox").value = rowname;
             document.getElementById("editNumberBox").value = rownum;
         }
 
         function editRow(tx) {
-               tx.executeSql('UPDATE PARAYANA SET location ="'+document.getElementById("editLocation").value+
-                       '", date= "'+document.getElementById("editdate").value+ '", medium= "'+document.getElementById("editMedium").value+ '", astakam_count= "'+document.getElementById("editAstakamCount").value+ '", astakam_value_count= "'+document.getElementById("editAstakamValueCount").value+ '" WHERE id = '+document.getElementById("editID").value , [], queryDB, errorCB);
-           }
+            tx.executeSql('UPDATE PARAYANA SET location ="' + document.getElementById("editLocation").value +
+                '", date= "' + document.getElementById("editdate").value + '", medium= "' + document.getElementById("editMedium").value + '", astakam_count= "' + document.getElementById("editAstakamCount").value + '", astakam_value_count= "' +
+                document.getElementById("editAstakamValueCount").value + '" WHERE id = ' + document.getElementById("editID").value, [], queryDB, errorCB);
+        }
+
         function goEdit() {
             var db = window.openDatabase("Database", "1.0", "Cordova PARAYANA", 200000);
             db.transaction(editRow, errorCB);
-            document.getElementById('qrpopup').style.display='none';
+            document.getElementById('qrpopup').style.display = 'none';
         }
 
-<!-- DatePicker-->
-function handleDates(elm, options) {
-      event.stopPropagation();
-      var currentField = $(elm);
-      var opts = options || {};
-      var minVal = opts.min || 0;
-      var maxVal = opts.max || 0;
+        <!-- DatePicker-->
+        function handleDates(elm, options) {
+            event.stopPropagation();
+            var currentField = $(elm);
+            var opts = options || {};
+            var minVal = opts.min || 0;
+            var maxVal = opts.max || 0;
 
-      var myNewDate = Date.parse(currentField.val()) || new Date();
-      if(typeof myNewDate === "number") {
-          myNewDate = new Date (myNewDate);
-      }
+            var myNewDate = Date.parse(currentField.val()) || new Date();
+            if (typeof myNewDate === "number") {
+                myNewDate = new Date(myNewDate);
+            }
 
-      window.plugins.datePicker.show({
-          date : myNewDate,
-          mode : 'date',
-          minDate: Date.parse(minVal),
-          maxDate: Date.parse(maxVal)
-      }, function(returnDate) {
-          if(returnDate !== "") {
-              var newDate = new Date(returnDate);
-              currentField.val(getFormattedDate(newDate));
-          }
-          currentField.blur();
-      });
-  }
+            window.plugins.datePicker.show({
+                date: myNewDate,
+                mode: 'date',
+                minDate: Date.parse(minVal),
+                maxDate: Date.parse(maxVal)
+            }, function(returnDate) {
+                if (returnDate !== "") {
+                    var newDate = new Date(returnDate);
+                    currentField.val(getFormattedDate(newDate));
+                }
+                currentField.blur();
+            });
+        }
     </script>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap.min.js"></script>
 
-<script type="text/javascript" src="datepickerquery.js"></script>
-<script type="text/javascript" src="datepickermin.js"></script>
+    <script type="text/javascript" src="datepickerquery.js"></script>
+    <script type="text/javascript" src="datepickermin.js"></script>
 
-  <script>
-  $(document).ready(function() {
-    $("#txtDateOB").datepicker();
-  });
-  </script>
-  <script>
-    $(function(){
-        var $select = $(".nootaenimidhi");
-        for (i=1;i<=108;i++){
-            $select.append($('<option></option>').val(i).html(i))
-        }
-        $('select.nootaenimidhi').on('change',function(){
-
+    <script>
+        $(document).ready(function() {
+            $("#txtDateOB").datepicker();
         });
-    });
-       </script>
+    </script>
+    <script>
+        $(function() {
+            var $select = $(".nootaenimidhi");
+            for (i = 1; i <= 108; i++) {
+                $select.append($('<option></option>').val(i).html(i))
+            }
+            $('select.nootaenimidhi').on('change', function() {
+
+            });
+        });
+    </script>
 </head>
+
 <body>
     <div id="content">
-    				<div class="inner">
-                        <article>
-							<header>
-								<!--
+        <div class="inner">
+            <article>
+                <header>
+                    <!--
 									Note: Titles and subtitles will wrap automatically when necessary, so don't worry
 									if they get too long. You can also remove the <p> entirely if you don't
 									need a subtitle.
 								-->
-								<h2><a href="#">Om Namah Sri Sitarama Yateendraya</a></h2>
-								<p>Vasudeva, Enter the data of Yateendra Astakam parayana</p>
-							</header>
-    <!-- Status bar overlay for fullscreen mode-->
-    <section class="main">
-      <form action="">
-          <div >
-          <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
-
-          </div>
-          <div>
-                <!--Name<input type="text" value="Name" id="txtName"><br>-->
-                <b>  Date</b><input type="text"  id="txtDateOB"><br>
-                     <b>Location</b><select id="txtLocation" >
+                    <h2><a href="#">Om Namah Sri Sitarama Yateendraya</a></h2>
+                    <p>Vasudeva, Enter the data of Yateendra Astakam parayana</p>
+                </header>
+                <!-- Status bar overlay for fullscreen mode-->
+                <section class="main">
+                    <form action="">
+                        <div>
+                        </div>
+                        <div>
+                            <b>Astakam</b><select id="txtparayanam"><option value="Sitarama_yateendra_Astakam">Sitarama_Yateendra_Astakam</option></select>
+                            <b>  Date</b><input type="text" id="txtDateOB"><br>
+                            <b>Location</b><select id="txtLocation">
                          <option value="Ashramam">Ashramam</option>
                          <option value="Banglore">Banglore</option>
                          <option value="Vijayawada">Vijayawada</option>
@@ -228,7 +207,7 @@ function handleDates(elm, options) {
                          <option value="Travel">Travel</option>
                          <option value="Others">Others</option>
                      </select><br>
-                      <b>Medium</b><select id="txtMedium">
+                            <b>Medium</b><select id="txtMedium">
                           <option value="Travel">Travel</option>
                           <option value="Work">Work</option>
                           <option value="Room">Room</option>
@@ -238,49 +217,50 @@ function handleDates(elm, options) {
                           <option value="Entertainment">Entertainment</option>
                           <option value="Others">Others</option>
                       </select><br>
-                    <b>Astakam Count</b><select class="nootaenimidhi" id="txtAstakamCount"></select><br>
-                    <b>Astakam Value Count</b><select class="nootaenimidhi" id="txtAstakamValueCount"></select><br>
-                    <b>Comments</b><input type="text" value="" id="txtComments"><br>
+                            <b>Astakam Count</b><select class="nootaenimidhi" id="txtAstakamCount"></select><br>
+                            <b>Astakam Value Count</b><select class="nootaenimidhi" id="txtAstakamValueCount"></select><br>
+                            <b>Comments</b><input type="text" value="" id="txtComments"><br>
 
-          </div>
-    	  <div style="text-align: center">
-              <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
+                        </div>
+                        <div style="text-align: center">
+                            <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
 
-          </div>
-          <div id="tblDiv"></div>
-          <div style="text-align: center">
-              <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
+                        </div>
+                        <!--To View Table -->
+                        <div id="tblDiv"></div>
+                        <div style="text-align: center">
+                            <button type="button" class="btn btn-success" onclick="goInsert()"><b>Insert</b></button>
 
-          </div>
-    </div>
-    </form>​
-    </section>
+                        </div>
+        </div>
+        </form>​
+        </section>
 
-</article>
-<!-- Sidebar -->
-			<div id="sidebar">
+        </article>
+        <!-- Sidebar -->
+        <div id="sidebar">
 
-				<!-- Logo -->
-					<h1 id="logo"><a href="#">Parayanam</a></h1>
+            <!-- Logo -->
+            <h1 id="logo"><a href="#">Parayanam</a></h1>
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<li class="current"><a href="index.html">Add Data</a></li>
-							<li><a href="index0.html">Archives</a></li>
-							<li><a href="#">About Me</a></li>
-							<li><a href="#">Contact Me</a></li>
-						</ul>
-					</nav>
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li class="current"><a href="index.html">Add Data</a></li>
+                    <li><a href="index0.html">Archives</a></li>
+                    <li><a href="#">About Me</a></li>
+                    <li><a href="#">Contact Me</a></li>
+                </ul>
+            </nav>
 
 
-			</div>
-            <!-- Scripts -->
-            <script src="assets/js/skel.min.js"></script>
-    			<script src="assets/js/util.js"></script>
-    			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    			<script src="assets/js/main.js"></script>
+        </div>
+        <!-- Scripts -->
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="assets/js/main.js"></script>
 
-  </body>
+</body>
 
 </html>
