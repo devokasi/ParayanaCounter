@@ -67,7 +67,7 @@
         function querySuccess(tx, results) {
                var tblText='<table id="t01" cellspacing="0"><tr><th>ID</th> <th>Date</th> <th>Location</th><th>Medium</th><th>Astakam Count</th><th>Astakam Value Count</th><th>Comments</th></tr>';
                var len = results.rows.length;
-               for (var i = len; i >=0; i--) {
+               for (var i = len-1; i >=0; i--) {
                    var tmpArgs=results.rows.item(i).id + ",'" + results.rows.item(i).date
                            + "','" + results.rows.item(i).location+"'"+ results.rows.item(i).medium
                                    + "','"+ results.rows.item(i).astakam_count+"'"+ results.rows.item(i).astakam_value_count+"'"+ results.rows.item(i).comments+"'";
