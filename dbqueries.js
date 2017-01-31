@@ -3,7 +3,7 @@ function queryDB(tx) {
 }
 
 function searchQueryDB(tx) {
-    tx.executeSql("SELECT * FROM PARAYANA where astakam_count like ('%" + document.getElementById("txtAstakamCount").value + "%')", [], querySuccess, errorCB);
+    tx.executeSql("SELECT * FROM PARAYANA where date like ('%" + document.getElementById("txtDate").value + "%')", [], querySuccess, errorCB);
 }
 
 // Query the success callback
