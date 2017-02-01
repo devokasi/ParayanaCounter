@@ -8,12 +8,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="css/tablestyle.css" />
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="jquerycss.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquerycss.css">
 
     <title>Parayana</title>
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <script src="js/cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
         // Wait for Cordova to load
         //
@@ -68,54 +68,11 @@
             document.getElementById("tblDiv").innerHTML = tblText;
         }
 
-        <!-- DatePicker-->
-        function handleDates(elm, options) {
-            event.stopPropagation();
-            var currentField = $(elm);
-            var opts = options || {};
-            var minVal = opts.min || 0;
-            var maxVal = opts.max || 0;
 
-            var myNewDate = Date.parse(currentField.val()) || new Date();
-            if (typeof myNewDate === "number") {
-                myNewDate = new Date(myNewDate);
-            }
-
-            window.plugins.datePicker.show({
-                date: myNewDate,
-                mode: 'date',
-                minDate: Date.parse(minVal),
-                maxDate: Date.parse(maxVal)
-            }, function(returnDate) {
-                if (returnDate !== "") {
-                    var newDate = new Date(returnDate);
-                    currentField.val(getFormattedDate(newDate));
-                }
-                currentField.blur();
-            });
-        }
     </script>
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrap.min.js"></script>
-    <script type="text/javascript" src="datepickerquery.js"></script>
-    <script type="text/javascript" src="datepickermin.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $("#txtDateOB").datepicker();
-        });
-    </script>
-    <script>
-        $(function() {
-            var $select = $(".nootaenimidhi");
-            for (i = 1; i <= 108; i++) {
-                $select.append($('<option></option>').val(i).html(i))
-            }
-            $('select.nootaenimidhi').on('change', function() {
 
-            });
-        });
-    </script>
+
 </head>
 
 <body>
@@ -203,7 +160,15 @@
         <!-- Scripts -->
         <script src="assets/js/skel.min.js"></script>
         <script src="assets/js/util.js"></script>
-        <script src="dbqueries.js"></script>
+        <script src="js/dbqueries.js"></script>
+        <script src="js/searchdbqueries.js"></script>
+        <script src="js/updatedeletequeries.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/datepickerquery.js"></script>
+        <script type="text/javascript" src="js/datepickermin.js"></script>
+        <script type="text/javascript" src="js/datepickerimplementation.js"></script>
+
         <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
         <script src="assets/js/main.js"></script>
 
